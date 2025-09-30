@@ -20,6 +20,7 @@
 #include <string>
 #include <sys/time.h>
 #include <netdb.h>
+#include <ctime>
 
 /*-------------------
 	定義
@@ -160,7 +161,7 @@ int traffic_event_get(struct URL stUrl, bool *bTcEventFail) {
 	bool bRet = false;	//返送値
 
 	std::string sBufRes = "";				//返送データバッファ
-	std::string sResData[STRING_DATA] = "";	//データ文字列
+	std::string sResData[STRING_DATA] = {""};	//データ文字列
 
 	char cBufSend[BUF_SED] = "";		//送信データバッファ
 	char cBufRes[BUF_RES] = "";			//受信データバッファ
@@ -255,7 +256,7 @@ int traffic_data_get(struct URL stUrl, int *nSetData) {
 	int nWorkOCC = 0;		//作業用
 
 	std::string sBufRes = "";				//返送データバッファ
-	std::string sResData[STRING_DATA] = "";	//データ文字列
+	std::string sResData[STRING_DATA] = {""};	//データ文字列
 
 	char cBufSend[BUF_SED] = "";		//送信データバッファ
 	char cBufRes[BUF_RES] = "";			//受信データバッファ
