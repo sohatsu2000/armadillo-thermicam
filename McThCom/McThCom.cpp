@@ -33,8 +33,10 @@
 #define MC_PORT	"5015"					//ポート
 
 //サーミカム
-#define TC1_ADRESS	"192.168.3.151"		//TC1_IPアドレス
-#define TC1_PORT	"80"				//TC1_ポート
+//#define TC1_ADRESS	"192.168.3.151"		//TC1_IPアドレス
+//#define TC1_PORT	"80"				//TC1_ポート
+#define TC1_ADRESS	"192.168.3.130"		//JEAN //TC1_IPアドレス
+#define TC1_PORT	"12130"				//JEAN //TC1_ポート
 
 #define BUF_URL 256				//URL文字列バッファ
 #define BUF_SED 1024			//送信データバッファ
@@ -705,32 +707,33 @@ int main(int argc, char* argv[]) {
 			time(&tTime_t);
 			tTime_tm = localtime(&tTime_t);
 
+            /*+ JEAN SKIP PLC PART +*/
 			//PLC接続
-			bConnect = server_open(&nSocket, cAddress, usPort);
+			//bConnect = server_open(&nSocket, cAddress, usPort);
 			//PLC読書き
-			if (true == bConnect) {
-				nSizeRead = word_read(cSend_buffer);
-				server_send(nSocket, cSend_buffer, nSizeRead);
-				server_receive(nSocket, cRecv_buffer, sizeof(cRecv_buffer));
+			//if (true == bConnect) {
+			//	nSizeRead = word_read(cSend_buffer);
+			//	server_send(nSocket, cSend_buffer, nSizeRead);
+			//	server_receive(nSocket, cRecv_buffer, sizeof(cRecv_buffer));
 
-				nSizeWrite = word_write(nSetData1, bTc1Fail, cSend_buffer, tTime_tm->tm_sec);
-				server_send(nSocket, cSend_buffer, nSizeWrite);
-				server_receive(nSocket, cRecv_buffer, sizeof(cRecv_buffer));
-				server_close(nSocket);
+			//	nSizeWrite = word_write(nSetData1, bTc1Fail, cSend_buffer, tTime_tm->tm_sec);
+			//	server_send(nSocket, cSend_buffer, nSizeWrite);
+			//	server_receive(nSocket, cRecv_buffer, sizeof(cRecv_buffer));
+			//	server_close(nSocket);
 
-				//時刻修正(1時間に一回)
-				if ((nTimeOldHour != tTime_tm->tm_hour && 0 <= tTime_tm->tm_sec) || false == bFirst) {
-					time_set(cRecv_buffer);	//アルマジロの時刻
-					th_time_set(stUrl1);	//サーミカムの時刻
-					nTimeOldHour = tTime_tm->tm_hour;	//前回時間の更新
-					bFirst = true;
-				}
-			}
-			else
-			{
-				server_close(nSocket);
-				bFirst = false;
-			}
+			//	//時刻修正(1時間に一回)
+			//	if ((nTimeOldHour != tTime_tm->tm_hour && 0 <= tTime_tm->tm_sec) || false == bFirst) {
+			//		time_set(cRecv_buffer);	//アルマジロの時刻
+			//		th_time_set(stUrl1);	//サーミカムの時刻
+			//		nTimeOldHour = tTime_tm->tm_hour;	//前回時間の更新
+			//		bFirst = true;
+			//	}
+			//}
+			//else
+			//{
+			//	server_close(nSocket);
+			//	bFirst = false;
+			//}
 			sleep(1);
 
 			//交通データの取得
@@ -743,6 +746,18 @@ int main(int argc, char* argv[]) {
 				}
 			}
 			bTc1Fail = bTc1Fail || bTc1EventFail;
+
+            // JEAN print current value
+            printf("UP_LIGHT_NUM: %d\t",nSetData1[UP_LIGHT_NUM]);
+            printf("UP_LIGHT_SPD: %d\t",nSetData1[UP_LIGHT_SPD]);
+            printf("UP_HEAVY_NUM: %d\t",nSetData1[UP_HEAVY_NUM]);
+            printf("UP_HEAVY_SPD: %d\t",nSetData1[UP_HEAVY_SPD]);
+            printf("UP_OCC      : %d\n",nSetData1[UP_OCC] );
+            printf("DW_LIGHT_NUM: %d\t",nSetData1[DW_LIGHT_NUM]);
+            printf("DW_LIGHT_SPD: %d\t",nSetData1[DW_LIGHT_SPD]);
+            printf("DW_HEAVY_NUM: %d\t",nSetData1[DW_HEAVY_NUM]);
+            printf("DW_HEAVY_SPD: %d\t",nSetData1[DW_HEAVY_SPD]);
+            printf("DW_OCC      : %d\n",nSetData1[DW_OCC] );
 		}
 		catch(...) {
 			perror("Err");
