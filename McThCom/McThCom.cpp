@@ -92,7 +92,7 @@ int traffic_event_get(struct URL stUrl, bool *bTcEventFail) {
 		//接続
 		if (0 == connect(nSoket, res->ai_addr, res->ai_addrlen)) {
 			//データ要求
-			sprintf(cBufSend, "GET /api/events/open\r\n");
+			sprintf(cBufSend, "GET /api/events/open\r\n\r\n");
 			printf("TH WRITE %s", cBufSend);
 			write(nSoket, cBufSend, strlen(cBufSend));
 
@@ -205,7 +205,7 @@ int traffic_data_get(struct URL stUrl, int *nSetData) {
 		//接続
 		if (0 == connect(nSoket, res->ai_addr, res->ai_addrlen)) {
 			//データ要求
-			sprintf(cBufSend, "GET /api/data?begintime=%s&endtime=%s\r\n", cBufTimeS, cBufTimeE);
+			sprintf(cBufSend, "GET /api/data?begintime=%s&endtime=%s\r\n\r\n", cBufTimeS, cBufTimeE);
 			printf("TH WRITE %s", cBufSend);
 			write(nSoket, cBufSend, strlen(cBufSend));
 
