@@ -1,5 +1,5 @@
 all:
-	g++ McThCom.cpp
+	g++ McThCom.cpp -Wall
 
 run:
 	./a.out

@@ -263,8 +263,8 @@ int traffic_data_get(struct URL stUrl, int *nSetData) {
 	char cBufSend[BUF_SED] = "";		//送信データバッファ
 	char cBufRes[BUF_RES] = "";			//受信データバッファ
 	
-	char cBufTimeS[] = "2023-08-16T16:39:00.000+09:00";
-	char cBufTimeE[] = "2023-08-16T16:39:00.000+09:00";
+	char cBufTimeS[80] = "2023-08-16T16:39:00.000+09:00";
+	char cBufTimeE[80] = "2023-08-16T16:39:00.000+09:00";
 
 	struct addrinfo hints, *res;
 
@@ -515,14 +515,12 @@ int avg_speed(int nHeavyNum, int nHeavySpd, int nLightNum, int nLightSpd) {
 	MCプロトコル通信・10進数の16進数文字列変換
   -----------------*/
 char C10_to_16(int nValue) {
-	char cWork[] = { (char)0x00 };
 
 	if (255 < nValue) {
 		nValue = 255;
 	}
-	sprintf(cWork, "%c", nValue);
 
-	return cWork[0];
+	return nValue & 0XFF;
 }
 
 /*-------------------
@@ -676,19 +674,9 @@ int time_set(const char *cBuffer) {
 	メイン
   -----------------*/
 int main(int argc, char* argv[]) {
-	bool bConnect = false;	//接続返送値
 	int nSocket = 0;	//接続返送値
-	int nSizeWrite = 0;	//書込データサイズ
-	int nSizeRead = 0;	//読込データサイズ
 
 	time_t tTime_t;				//時刻
-	struct tm *tTime_tm;		//時刻
-
-	char cAddress[BUF_URL] = MC_ADRESS;	//PLCアドレス
-	unsigned short usPort = (unsigned short)atoi(MC_PORT);	//PLCポート
-
-	char cSend_buffer[MC_BUFSIZE] = "";	//送信データバッファ
-	char cRecv_buffer[MC_BUFSIZE] = "";	//受信データバッファ
 
 	struct URL stUrl1 = { TC1_ADRESS, "/", TC1_PORT };
 
@@ -697,15 +685,11 @@ int main(int argc, char* argv[]) {
 	bool bTc1Fail = false;		//TC1故障
 	bool bTc1EventFail = false;	//TC1イベント故障
 
-	int nTimeOldHour = 99;	//時刻修正、前回時間
-
-	bool bFirst = false;	//起動初期
-
 	while (true) {
 		try {
 			// 現在時刻の取得
 			time(&tTime_t);
-			tTime_tm = localtime(&tTime_t);
+			//tTime_tm = localtime(&tTime_t);
 
             /*+ JEAN SKIP PLC PART +*/
 			//PLC接続
