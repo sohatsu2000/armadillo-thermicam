@@ -14,6 +14,35 @@ function file_append(fn,data){
   });
 }
 
+function log_line(data){
+  const D = data.data[0]
+  const time = D.time
+  const z1=D.zone.filter(x=>x.zoneId==1).pop()
+  const z2=D.zone.filter(x=>x.zoneId==2).pop()
+  const c11 = z1?.['class'].filter(x=>x.classNr==1).pop()
+  const c12 = z1?.['class'].filter(x=>x.classNr==2).pop()
+  const c21 = z2?.['class'].filter(x=>x.classNr==1).pop()
+  const c22 = z2?.['class'].filter(x=>x.classNr==2).pop()
+  const up={
+    ns:c11?.numVeh,
+    ss:c11?.speed,
+    nl:c12?.numVeh,
+    sl:c12?.speed,
+    oc:z1?.occupancy,
+  }
+  const dw={
+    ns:c21?.numVeh,
+    ss:c21?.speed,
+    nl:c22?.numVeh,
+    sl:c22?.speed,
+    oc:z2?.occupancy,
+  }
+  return `${time}`+
+  `,${up.ns},${up.ss},${up.nl},${up.sl},${up.oc}`+
+  `,${dw.ns},${dw.ss},${dw.nl},${dw.sl},${dw.oc}`+
+  '';
+}
+
 function rand(min,max) {
     return  min + Math.floor(Math.random() * (max-min))
 }
@@ -71,20 +100,20 @@ const server = http.createServer((req, res) => {
   "data": [
     {
       "dataNumber": null,
-      "intervalTime": null,
+      "intervalTime": "60",
       "messageType": "Data",
-      "time": "2015-06-04T11:57:00.040+02:00", /* time compris entre les deux parametres de l'url */
+      "time": (new Date).toISOString(), /* time compris entre les deux parametres de l'url */
       "type": "IntegratedData",
       "zone": zones
     }
   ],
-  "nextDataUrl": "/api/data?begintime=2015-06-04T12%3A18%3A00.024%2B02%3A00" /*pas utile mais genere le quand meme on verra plus tard*/
+  //"nextDataUrl": "/api/data?begintime=2015-06-04T12%3A18%3A00.024%2B02%3A00" /*pas utile mais genere le quand meme on verra plus tard*/
 };
 
     const json = JSON.stringify(data)
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(json);
-    file_append("data.log",(new Date).toISOString()+":"+json);
+    file_append("data.log",log_line(data));
   } else
   if (parsedUrl.pathname === '/api/events/open') {
     const events = [
