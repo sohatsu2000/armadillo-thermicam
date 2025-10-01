@@ -374,16 +374,16 @@ int main(int argc, char* argv[]) {
 			bTc1Fail = bTc1Fail || bTc1EventFail;
 
             // JEAN print current value
-            printf("UP_LIGHT_NUM: %d\t",nSetData1[UP_LIGHT_NUM]);
-            printf("UP_LIGHT_SPD: %d\t",nSetData1[UP_LIGHT_SPD]);
-            printf("UP_HEAVY_NUM: %d\t",nSetData1[UP_HEAVY_NUM]);
-            printf("UP_HEAVY_SPD: %d\t",nSetData1[UP_HEAVY_SPD]);
-            printf("UP_OCC      : %d\n",nSetData1[UP_OCC] );
-            printf("DW_LIGHT_NUM: %d\t",nSetData1[DW_LIGHT_NUM]);
-            printf("DW_LIGHT_SPD: %d\t",nSetData1[DW_LIGHT_SPD]);
-            printf("DW_HEAVY_NUM: %d\t",nSetData1[DW_HEAVY_NUM]);
-            printf("DW_HEAVY_SPD: %d\t",nSetData1[DW_HEAVY_SPD]);
-            printf("DW_OCC      : %d\n",nSetData1[DW_OCC] );
+            printf("UP_LIGHT_NUM:% 3d\t",nSetData1[UP_LIGHT_NUM]);
+            printf("UP_LIGHT_SPD:% 3d\t",nSetData1[UP_LIGHT_SPD]);
+            printf("UP_HEAVY_NUM:% 3d\t",nSetData1[UP_HEAVY_NUM]);
+            printf("UP_HEAVY_SPD:% 3d\t",nSetData1[UP_HEAVY_SPD]);
+            printf("UP_OCC:% 3d\n",nSetData1[UP_OCC] );
+            printf("DW_LIGHT_NUM:% 3d\t",nSetData1[DW_LIGHT_NUM]);
+            printf("DW_LIGHT_SPD:% 3d\t",nSetData1[DW_LIGHT_SPD]);
+            printf("DW_HEAVY_NUM:% 3d\t",nSetData1[DW_HEAVY_NUM]);
+            printf("DW_HEAVY_SPD:% 3d\t",nSetData1[DW_HEAVY_SPD]);
+            printf("DW_OCC:% 3d\n",nSetData1[DW_OCC] );
 		}
 		catch(...) {
 			perror("Err");
