@@ -116,7 +116,8 @@ void setTime(void)
 			// sprintf(dt, "date -s %02d%02d%02d%02d%04d.%02d", mon, day, hour, min, year, sec);
 			// Armadillo G3用
 			//   'date -s "yyyy/mm/dd_hh:mm:ss"'
-			sprintf(dt, "date -s \"%04d/%02d/%02d %02d:%02d:%02d\"", year, mon, day, hour, min, sec);
+			// JEAN: use ISO format YYY-MM-DD hh:mm:ss
+			sprintf(dt, "date -s \"%04d-%02d-%02d %02d:%02d:%02d\"", year, mon, day, hour, min, sec);
 
 			// コマンド実行
 			system(dt);
