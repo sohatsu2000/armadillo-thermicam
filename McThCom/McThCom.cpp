@@ -59,8 +59,10 @@ int write_tdata(int* nSetData1){
 		int dhn = nSetData1[DW_HEAVY_NUM] ;
 		int dhs = nSetData1[DW_HEAVY_SPD] ;
 		int doc = nSetData1[DW_OCC]       ;
-		int uas = (uhn + uln) / (1/uls + 1/uhs);
-		int das = (dhn + dln) / (1/dls + 1/dhs);
+		// int uas = !(uls&&uhs) ? 0 : (uhn + uln) / ( (double)(1/uls + 1/uhs) + 0.000000001 );
+		// int das = !(dls&&dhs) ? 0 : (dhn + dln) / ( (double)(1/dls + 1/dhs) + 0.000000001 );
+		int uas = (uls + uhs)/2;
+		int das = (dls + dhs)/2;
 
 		// TODO use time from data returned rather than now
 		time_t tNowTime = time(NULL);
