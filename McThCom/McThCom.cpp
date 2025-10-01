@@ -16,6 +16,7 @@
 #include <netdb.h>
 #include <ctime>
 
+#define TDATA "tdata.txt"
 
 //サーミカム
 //#define TC1_ADRESS	"192.168.3.151"		//TC1_IPアドレス
@@ -47,6 +48,58 @@ enum e_data_num {
 	DW_OCC,
 };
 
+int write_tdata(int* nSetData1){
+		int uln = nSetData1[UP_LIGHT_NUM] ;
+		int uls = nSetData1[UP_LIGHT_SPD] ;
+		int uhn = nSetData1[UP_HEAVY_NUM] ;
+		int uhs = nSetData1[UP_HEAVY_SPD] ;
+		int uoc = nSetData1[UP_OCC]       ;
+		int dln = nSetData1[DW_LIGHT_NUM] ;
+		int dls = nSetData1[DW_LIGHT_SPD] ;
+		int dhn = nSetData1[DW_HEAVY_NUM] ;
+		int dhs = nSetData1[DW_HEAVY_SPD] ;
+		int doc = nSetData1[DW_OCC]       ;
+		int uas = (uhn + uln) / (1/uls + 1/uhs);
+		int das = (dhn + dln) / (1/dls + 1/dhs);
+
+		// TODO use time from data returned rather than now
+		time_t tNowTime = time(NULL);
+		//データ開始時間 00:17:00-> 00:15:50_00:16:10
+		time_t tstartTime = tNowTime - 70;
+		struct tm *pstartTime = localtime(&tstartTime);
+		int sY = pstartTime->tm_year + 1900;
+		int sM = pstartTime->tm_mon + 1;
+		int sD = pstartTime->tm_mday ;
+		int sh = pstartTime->tm_hour ;
+		int sm = pstartTime->tm_min ;
+		int ss = 50 ;
+
+		//データ終了時間
+		time_t tendTime = tNowTime - 50;
+		struct tm *pendTime = localtime(&tendTime);
+		int eY = pendTime->tm_year + 1900;
+		int eM = pendTime->tm_mon + 1;
+		int eD = pendTime->tm_mday ;
+		int eh = pendTime->tm_hour ;
+		int em = pendTime->tm_min ;
+		int es = 10 ;
+		
+    FILE *file = fopen(TDATA, "w");
+    
+    if (file == NULL) {
+			return -1; // Error
+    }
+    
+		int written = fprintf(file, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d",
+				 sY , sM , sD, sh , sm , ss,
+				 eY , eM , eD, eh , em , es,
+				 uhn, uln, 0 , uas, uoc, 0,
+				 dhn, dln, 0 , uas, doc, 0);
+
+    fclose(file);
+    
+    return written;
+}
 
 /*-------------------
 	イベント情報の取得
@@ -304,6 +357,8 @@ int main(int argc, char* argv[]) {
 
 	while (true) {
 		try {
+
+			write_tdata(nSetData1);
 			
 			sleep(1);
 
