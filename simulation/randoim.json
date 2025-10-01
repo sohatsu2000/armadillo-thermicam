@@ -1,0 +1,129 @@
+{
+  "data": [
+    {
+      "dataNumber": "9",
+      "intervalTime": "60",
+      "messageType": "Data",
+      "time": "2023-09-29T11:40:00.054+09:00",
+      "type": "IntegratedData",
+      "zone": [
+        {
+          "class": [
+            {
+              "classNr": "1",
+              "gapTime": "3166",
+              "numVeh": "1",
+              "speed": "1"
+            },
+            {
+              "classNr": "2",
+              "gapTime": "0",
+              "numVeh": "0",
+              "speed": "0"
+            },
+            {
+              "classNr": "3",
+              "gapTime": "0",
+              "numVeh": "0",
+              "speed": "0"
+            },
+            {
+              "classNr": "4",
+              "gapTime": "0",
+              "numVeh": "0",
+              "speed": "0"
+            },
+            {
+              "classNr": "5",
+              "gapTime": "0",
+              "numVeh": "0",
+              "speed": "0"
+            },
+            {
+              "classNr": "6",
+              "gapTime": "0",
+              "numVeh": "0",
+              "speed": "0"
+            },
+            {
+              "classNr": "7",
+              "gapTime": "0",
+              "numVeh": "0",
+              "speed": "0"
+            },
+            {
+              "classNr": "8",
+              "gapTime": "0",
+              "numVeh": "0",
+              "speed": "0"
+            }
+          ],
+          "confidence": "0",
+          "density": "60",
+          "headWay": "87",
+          "length": "3",
+          "occupancy": "0",
+          "zoneId": "1"
+        },
+        {
+          "class": [
+            {
+              "classNr": "1",
+              "gapTime": "0",
+              "numVeh": "0",
+              "speed": "0"
+            },
+            {
+              "classNr": "2",
+              "gapTime": "0",
+              "numVeh": "0",
+              "speed": "0"
+            },
+            {
+              "classNr": "3",
+              "gapTime": "0",
+              "numVeh": "0",
+              "speed": "0"
+            },
+            {
+              "classNr": "4",
+              "gapTime": "0",
+              "numVeh": "0",
+              "speed": "0"
+            },
+            {
+              "classNr": "5",
+              "gapTime": "0",
+              "numVeh": "0",
+              "speed": "0"
+            },
+            {
+              "classNr": "6",
+              "gapTime": "0",
+              "numVeh": "0",
+              "speed": "0"
+            },
+            {
+              "classNr": "7",
+              "gapTime": "0",
+              "numVeh": "0",
+              "speed": "0"
+            },
+            {
+              "classNr": "8",
+              "gapTime": "0",
+              "numVeh": "0",
+              "speed": "0"
+            }
+          ],
+          "confidence": "0",
+          "density": "0",
+          "headWay": "0",
+          "length": "0",
+          "occupancy": "0",
+          "zoneId": "2"
+        }
+      ]
+    }
+  ]
+}

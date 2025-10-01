@@ -1,0 +1,62 @@
+{
+  "data": [
+    {
+      "dataNumber": null,
+      "intervalTime": null,
+      "messageType": "Data",
+      "time": "2015-06-04T11:57:00.040+02:00", /* time compris entre les deux parametres de l'url */
+      "type": "IntegratedData",
+      "zone": [
+        {
+          "class": [
+            {
+              "classNr": "1",
+              "gapTime": null,
+              "gapTimeSq": null,
+              "numVeh": "5",
+              "speed": "101",
+              "speedSq": null
+            },
+            /* bloc optionel en fonction de classNr (si numveh=0)*/
+            /*n'en genere pas plus que 3 je pense */
+            {
+              "classNr": "3",
+              "gapTime": null,
+              "gapTimeSq": null,
+              "numVeh": "3",
+              "speed": "91",
+              "speedSq": null
+            }
+          ],
+          "confidence": null,
+          "density": null,
+          "headWay": null,
+          "headWaySq": null,
+          "length": null,
+          "occupancy": "6",
+          "zoneId": "1"
+        },
+        {
+          "class": [
+            {
+              "classNr": "1",
+              "gapTime": null,
+              "gapTimeSq": null,
+              "numVeh": "8",
+              "speed": "110",
+              "speedSq": null
+            }
+          ],
+          "confidence": null,
+          "density": null,
+          "headWay": null,
+          "headWaySq": null,
+          "length": null,
+          "occupancy": "3",
+          "zoneId": "2"
+        }
+      ]
+    }
+  ],
+  "nextDataUrl": "/api/data?begintime=2015-06-04T12%3A18%3A00.024%2B02%3A00" /*pas utile mais genere le quand meme on verra plus tard*/
+}
