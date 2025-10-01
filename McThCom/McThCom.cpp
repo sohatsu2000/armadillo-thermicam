@@ -20,8 +20,6 @@
 //サーミカム
 //#define TC1_ADRESS	"192.168.3.151"		//TC1_IPアドレス
 //#define TC1_PORT	"80"				//TC1_ポート
-#define TC1_ADRESS	"192.168.3.130"		//JEAN //TC1_IPアドレス
-#define TC1_PORT	"12130"				//JEAN //TC1_ポート
 
 #define BUF_URL 256				//URL文字列バッファ
 #define BUF_SED 1024			//送信データバッファ
