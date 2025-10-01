@@ -94,7 +94,7 @@ int write_tdata(int* nSetData1){
 				 sY , sM , sD, sh , sm , ss,
 				 eY , eM , eD, eh , em , es,
 				 uhn, uln, 0 , uas, uoc, 0,
-				 dhn, dln, 0 , uas, doc, 0);
+				 dhn, dln, 0 , das, doc, 0);
 
     fclose(file);
     
