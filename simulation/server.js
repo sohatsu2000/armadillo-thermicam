@@ -1,6 +1,8 @@
 const http = require('http');
 const url = require('url');
 const fs = require('fs');
+const seed = require('seedrandom');
+let generator = seed(0);
 
 const PORT = 12130;
 
@@ -44,7 +46,7 @@ function log_line(data){
 }
 
 function rand(min,max) {
-    return  min + Math.floor(Math.random() * (max-min))
+    return  min + Math.floor(generator() * (max-min))
 }
 
 function newarr(n,callback){
@@ -92,6 +94,9 @@ const server = http.createServer((req, res) => {
   // Optionally, parse to Date objects
   const beginDate = new Date(begintime);
   const endDate = new Date(endtime);
+  console.log('Actual date:', beginDate);
+  console.log('Sneed:', beginDate.getTime());
+  generator=seed(beginDate?.getTime() ?? 0);
 
   // Check for the route and method
   if (parsedUrl.pathname === '/api/data') {
