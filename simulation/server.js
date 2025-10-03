@@ -56,7 +56,6 @@ function newarr(n,callback){
 function rand_class(i) {
     const n = rand(0,10)
     const s = rand(60,120)
-    if (n==0) return null;
     return {
               "classNr": `${i}`,
               "gapTime": null,
@@ -70,7 +69,6 @@ function rand_class(i) {
 function rand_zone(i) {
     cls = newarr(3,rand_class);
     const o = rand(1,10) * 10
-    if (cls.length==0) return null;
     return {
           "class": cls,
           "confidence": null,
