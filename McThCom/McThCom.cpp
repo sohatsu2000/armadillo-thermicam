@@ -217,8 +217,8 @@ int traffic_data_get(struct URL stUrl, int *nSetData) {
 	char cBufSend[BUF_SED] = "";		//送信データバッファ
 	char cBufRes[BUF_RES] = "";			//受信データバッファ
 	
-	char cBufTimeS[80] = "2023-08-16T16:39:00.000+09:00";
-	char cBufTimeE[80] = "2023-08-16T16:39:00.000+09:00";
+	char cBufTimeS[80] = "2023-08-16T16:39:00.000%2B09:00";
+	char cBufTimeE[80] = "2023-08-16T16:39:00.000%2B09:00";
 
 	struct addrinfo hints, *res;
 
@@ -242,13 +242,13 @@ int traffic_data_get(struct URL stUrl, int *nSetData) {
 	time_t tNowTime = time(NULL);
 	tNowTime -= 70;
 	struct tm *pNowTime = localtime(&tNowTime);
-	sprintf(cBufTimeS, "%d-%02d-%02dT%02d:%02d:50.000+09:00", pNowTime->tm_year + 1900, pNowTime->tm_mon + 1, pNowTime->tm_mday, pNowTime->tm_hour, pNowTime->tm_min);
+	sprintf(cBufTimeS, "%d-%02d-%02dT%02d:%02d:50.000%%2B09:00", pNowTime->tm_year + 1900, pNowTime->tm_mon + 1, pNowTime->tm_mday, pNowTime->tm_hour, pNowTime->tm_min);
 
 	//データ終了時間
 	tNowTime = time(NULL);
 	tNowTime -= 50;
 	pNowTime = localtime(&tNowTime);
-	sprintf(cBufTimeE, "%d-%02d-%02dT%02d:%02d:10.000+09:00", pNowTime->tm_year + 1900, pNowTime->tm_mon + 1, pNowTime->tm_mday, pNowTime->tm_hour, pNowTime->tm_min);
+	sprintf(cBufTimeE, "%d-%02d-%02dT%02d:%02d:10.000%%2B09:00", pNowTime->tm_year + 1900, pNowTime->tm_mon + 1, pNowTime->tm_mday, pNowTime->tm_hour, pNowTime->tm_min);
 
 	tNowTime = time(NULL);
 	pNowTime = localtime(&tNowTime);
